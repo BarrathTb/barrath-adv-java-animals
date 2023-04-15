@@ -1,6 +1,6 @@
 package us.mattgreen;
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -10,11 +10,22 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Talkable> zoo = new ArrayList<>();
 
-        // Lines to Replace Begin Here
-        zoo.add(new Dog(true, "Bean"));
-        zoo.add(new Cat(9, "Charlie"));
-        zoo.add(new Teacher(44, "Stacy Read"));
-        // End Lines to Replace
+
+        AnimalCreator animalCreator = new CreateAnimal();
+
+        // Add new animals using createAnimal() method
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Press Enter if you would like to add an animal to the Zoo!, or 'exit' to quit: ");
+            String input = scanner.nextLine();
+            if (input.equals("exit")) {
+                break;
+            }
+            Talkable newAnimal = animalCreator.createAnimal(scanner);
+            if (newAnimal != null) {
+                zoo.add(newAnimal);
+            }
+        }
 
         for (Talkable thing : zoo) {
             printOut(thing);
